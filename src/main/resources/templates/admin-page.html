@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+</head>
+
+<body oncontextmenu='return false' class='snippet-body bg-light'>
+    <div class="container-xl px-4 mt-4">
+		
+		<div th:replace="fragments/navbar"></div>
+
+        <h2 style="margin: 1rem">Dashboard</h2>
+        <ul class="m-0 nav nav-fill nav-justified nav-tabs" id="myTab" role="tablist" style="max-width: 40vw">
+
+            <li class="nav-item" role="presentation">
+                <button class="active nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions" type="button" role="tab" aria-controls="questions" aria-selected="true">
+                    <i class="fas fa-questions"></i>
+                    Reported Questions
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="answers-tab" data-bs-toggle="tab" data-bs-target="#answers" type="button" role="tab" aria-controls="answers" aria-selected="false">
+                    <i class="fas fa-user-astronaut"></i>
+                    Reported Answers
+                </button>
+            </li>
+
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="false">
+					<i class="fas fa-user-astronaut"></i>
+					Users
+				</button>
+			</li>  
+
+        </ul>
+
+
+        <div class="border-grey bg-white p-3 tab-content">
+
+            <div class="tab-pane active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+				<p th:if="${reportedQues.empty}" class="m-3">No reported questions yet...</p>
+				<th:block th:each="reportedQues: ${reportedQues}">
+					<div class="border rounded-sm p-3 m-3 shadow-sm bg-white">
+						<p th:text="${reportedQues.question.content}"> 
+							REPORTED QUESTION
+						</p>
+						<div class="d-flex justify-content-end m-2">
+							<!-- <button type="button" class="btn btn-outline-primary m-1">Resolve</button> -->
+							<form th:action="@{${'/ques-resolve-report/' + reportedQues.id}}" method="POST">
+								<button type="submit" class="btn btn-outline-primary m-1">Resolve</button>
+							</form>
+							<!-- <button type="button" class="btn btn-outline-danger m-1">Dismiss</button> -->
+							<form th:action="@{${'/ques-dismiss-report/' + reportedQues.id}}" method="POST">
+								<button type="submit" class="btn btn-outline-danger m-1">Dismiss</button>
+							</form>
+						</div>
+					</div>
+				</th:block>
+            </div>
+
+            <div class="tab-pane" id="answers" role="tabpanel" aria-labelledby="answers-tab">
+				<p th:if="${reportedAns.empty}" class="m-3">No reported answers yet...</p>
+				<th:block th:each="reportedAns: ${reportedAns}">
+					<div class="border rounded-sm p-3 m-3 shadow-sm bg-white">
+						<p th:text="${reportedAns.answer.content}">
+							REPORTED ANSWER
+						</p>
+						<div class="d-flex justify-content-end m-2">
+							<!-- <button type="button" class="btn btn-outline-primary m-1">Resolve</button> -->
+							<form th:action="@{${'/resolve-report/' + reportedAns.id}}" method="POST">
+								<button type="submit" class="btn btn-outline-primary m-1">Resolve</button>
+							</form>
+							<!-- <button type="button" class="btn btn-outline-danger m-1">Dismiss</button> -->
+							<form th:action="@{${'/dismiss-report/' + reportedAns.id}}" method="POST">
+								<button type="submit" class="btn btn-outline-danger m-1">Dismiss</button>
+							</form>
+						</div>
+					</div>
+				</th:block>
+            </div>
+
+			<div class="tab-pane" id="users" role="tabpanel" aria-labelledby="users-tab">
+				<p th:if="${users.empty}" class="m-3">No users yet...</p>
+				<th:block th:each="user: ${users}">
+					<div class="border rounded-sm p-3 m-3 shadow-sm bg-white">
+						<p th:text="${user.username}">
+					  	USER
+						</p>
+						<div class="d-flex justify-content-end m-2">
+							<form th:action="@{${'/delete-userProfile/' + user.id}}" method="GET">
+								<button type="submit" class="btn btn-outline-danger m-1">Remove User</button>
+							</form>
+						</div>
+					</div>
+				</th:block>
+			</div>
+
+        </div>
+
+    </div>
+</body>
+
+<script type='text/Javascript'> var firstTabEl = document.querySelector('#myTab li:last-child a'); var firstTab = new bootstrap.Tab(firstTabEl); firstTab.show(); </script>
+
+<style> body{padding:0;margin:0;background-color:#eee}.border-grey{border:1px solid;border-end-start-radius:5px;border-end-end-radius:5px;border-top:none;border-color:#dee2e6}.active{background-color:#fff}#myTab{background-color:#dee2e6}.nav-link{color:#666} </style>
+
+</html>

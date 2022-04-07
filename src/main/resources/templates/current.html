@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body class="bg-light">
+    <div class="container-xl px-4 mt-4">
+
+        <div th:replace="fragments/navbar"></div>
+
+        <div class="row">
+            <h2 class="mb-4">Profile</h2>
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0" style="box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);">
+                    <div class="card-header" style="font-weight: 500; padding: 1rem 1.35rem;">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <img class="img-account-profile rounded-circle mb-0" th:src="@{${currentlyLoggedInUser.getProfilePicture()}}" alt="Profile Picture" style="height: 13rem; width: 13rem; margin-bottom: 2rem;">
+                        <!-- <button class="btn btn-outline-primary" type="button" style="margin-top: 20px;">Upload new image</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4" style="box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);">
+                    <div class="card-header" style="font-weight: 500; padding: 1rem 1.35rem;">Account Details</div>
+                    <div class="card-body">
+                        <form th:object="${currentlyLoggedInUser}" th:action="@{${'/update-userProfile/' + currentlyLoggedInUser.id}}" method="POST">
+                            <!-- Form Group (username)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputUsername">Username</label>
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="Enter your username" th:field="*{username}" style="padding: 0.875rem 1.125rem;">
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputFirstName">First Name</label>
+                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" th:field="*{firstName}" style="padding: 0.875rem 1.125rem;">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" ></div>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputLastName">Last Name</label>
+                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" th:field="*{lastName}" style="padding: 0.875rem 1.125rem;">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" ></div>
+
+                                    <input type="hidden" th:field="*{id}" th:value="*{id}">
+                                    <input type="hidden" th:field="*{password}" th:value="*{password}">
+                                    <input type="hidden" th:field="*{role}" th:value="*{role}">
+                                </div>
+                            </div>
+
+                            <button class="btn btn-outline-secondary" type="submit">Save changes</button>
+                        </form>
+
+                        <div>
+                            <form  class="d-flex flex-row-reverse mt-3" th:action="@{${'/delete-userProfile/' + currentlyLoggedInUser.id}}" method="GET">
+                              <button type="submit" class="btn btn-outline-danger">Delete Account</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:if="${currentlyLoggedInUser.role} == 'MEMBER'" style="font-family: 'elianto'; font-size: x-large;" th:href="@{'/all-questions'}">
+            <span>K E L E M</span>
+        </a>
+
+        <a class="navbar-brand" th:if="${currentlyLoggedInUser.role} == 'ADMIN'" style="font-family: 'elianto'; font-size: x-large;" th:href="@{'/admin'}">
+            <span style="margin-bottom:-3px">K E L E M</span>
+            <svg th:if="${currentlyLoggedInUser.role} == 'ADMIN'" width="23" height="23" style="margin-left: 5px; margin-bottom: 4px;" fill="currentColor" class="bi bi-person-check-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item d-flex">
+                    <a class="nav-link mx-2" aria-current="page" th:href="@{'/all-questions'}" th:if="${currentlyLoggedInUser.role} == 'MEMBER'">Home</a>
+                </li> -->
+
+                <!-- <li class="nav-item d-flex">
+                    <a class="nav-link mx-2" aria-current="page" th:href="@{'/admin'}" th:if="${currentlyLoggedInUser.role} == 'ADMIN'">Home</a>
+                </li> -->
+
+                <li class="nav-item">
+                    <a class="nav-link mx-2" th:href="@{'/add-question'}" th:if="${currentlyLoggedInUser.role} == 'MEMBER'">Ask Question</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mx-2" th:href="@{'/add-admin'}" th:if="${currentlyLoggedInUser.role} == 'ADMIN'">Add Admin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mx-2" th:href="@{'/quizes'}" th:if="${currentlyLoggedInUser.role} == 'MEMBER'">Quizzes</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mx-2" th:href="@{'/add-quiz'}" th:if="${currentlyLoggedInUser.role} == 'ADMIN'">Add Quiz</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- <img th:src="@{${'/user-photos/' + user.id+ '/' + user.profilePicture}}" class="img-account-profile rounded-circle mb-2" style="height: 1.5rem; width: 1.5rem;" alt="Profile Picture"> -->
+                        <img th:src="@{${currentlyLoggedInUser.getProfilePicture()}}" class="img-account-profile rounded-circle mb-2" style="height: 1.5rem; width: 1.5rem;" alt="Profile Picture">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li> <a class="dropdown-item" th:href="@{${'/currently-registered-user/' + currentlyLoggedInUser.id}}" style="text-align: center;">My Profile</a> </li>
+                        <li> <hr class="dropdown-divider"> </li>
+                        <li> 
+                            <form method="POST" th:action="@{/logout}">
+                                <input type="submit" value="Log Out" class="dropdown-item" style="text-align: center;">
+                            </form>
+                                <!-- <input type="submit" value="Logout"> -->
+                        </li>
+                        </form>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <style> @font-face { font-family: 'elianto'; src: url(../../fonts/Elianto-Regular.otf); } </style>
+</nav>
+<hr class="mt-0 mb-4">

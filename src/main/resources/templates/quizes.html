@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Quizzes</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body class="bg-light">
+	<div class="container-xl px-4 mt-4">
+
+		<div th:replace="fragments/navbar"></div>
+
+		<div class="row">
+			<h2>Quizzes</h2>
+			<p th:if="${quizes.empty}" class="m-3">No quizzes yet...</p>
+			<th:block th:each="quiz: ${quizes}">
+				<div class="col-md-4 col-sm-6 content-card d-flex justify-content-center">
+					<div class="card-big-shadow">
+						<div class="card card-just-text">
+							<div class="content">
+								<p class="description question" th:text="${quiz.question}">QUESTION</p>
+								<div class="divider">
+									<hr class="line">
+									<button class="show-answer" onclick="$(this).parent().next().show(); $(this).next().show(); $(this).hide(); return false;" style="border: none; background-color: #fff;">
+										<svg version="1.1" id="Layer_1" x="0px" y="0px"
+											width="20px" height="20px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
+											<path style="fill:#66615b" id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+												c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+												s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+										</svg>
+									</button>
+									<button class="hide-answer" onclick="$(this).parent().next().hide(); $(this).prev().show(); $(this).hide(); return false;" style="display: none; border: none; background-color: #fff;">
+										<svg version="1.1" id="Layer_1" x="0px" y="0px"
+											width="20px" height="20px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
+											<path style="fill:#66615b" id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394
+												l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393
+												C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"/>
+										</svg>
+									</button>
+									<hr class="line">
+								</div>
+								<p class="description answer mt-3" style="display: none;" th:text="${quiz.answer}">ANSWER</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</th:block>
+		</div>
+    </div>
+</body>
+
+<style type="text/css"> body{margin-top:20px}.divider{display:flex;justify-content:center;align-items:center}.line{flex:1;border:none;height:.1px;background:#aaa}.card-big-shadow{max-width:320px;position:relative}.coloured-cards .card{margin-top:30px}.card[data-radius=none]{border-radius:0}.card{border-radius:8px;box-shadow:0 2px 2px rgba(204,197,185,.5);background-color:#fff;color:#252422;margin-bottom:20px;position:relative;z-index:1}.card.card-just-text .content{padding:50px 65px;text-align:center}.card .content{padding:20px 20px 10px 20px}.card .category,.card .label{font-size:14px;margin-bottom:0}.card-big-shadow:before{background-position:center bottom;background-repeat:no-repeat;background-size:100% 100%;bottom:-12%;content:"";display:block;left:-12%;position:absolute;right:0;top:0;z-index:0}.h4,h4{font-size:1.5em;font-weight:600;line-height:1.2em}.h6,h6{font-size:.9em;font-weight:600;text-transform:uppercase}.card .description{font-size:16px;color:#66615b}.content-card{margin-top:30px}a:focus,a:hover{text-decoration:none} </style>
+
+</html>

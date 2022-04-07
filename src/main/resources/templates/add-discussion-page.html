@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registration</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+        <div th:text="${answer.id}" />
+        <div th:text="${answer.content}" />
+        <!-- <form action="@{${'/answer-question/' + ${question.id}}">
+          <button type="submit">Answer</button>
+        </form> -->
+      </br>
+      </br>
+
+      <form method="post" th:object="${discussion}">
+        <label for="text-area">Your Answer</label>
+        <textarea th:field="*{content}" id="text-area" cols="30" rows="10">Your Answer</textarea>
+        <button type="submit">submit</button>
+      </form>
+      <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+        </form>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>

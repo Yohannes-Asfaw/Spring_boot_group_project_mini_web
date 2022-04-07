@@ -1,0 +1,12 @@
+insert into question_model values(7, "abc", "abc", "UNANSWERED", "abc", 3, 1);
+insert into question_model values(6, "abc", "abc", "UNANSWERED", "ghjkn", 3, 1);
+insert into tag_model values(4, "#Bio");
+insert into tag_model values(1, "#Biology");
+insert into question_model values(5, "xfcgvhbj", "fghjk", "UNANSWERED", "ghjkn" , 3, 1);
+insert into question_model values(4, "xfcgvhbj", "fghjk", "UNANSWERED", "ghjkn", 2, 1);
+insert into tag_model values(3, "#Otheemistry");
+insert into tag_model values(2, "#Chemistry");
+insert into question_model values(3, "xfcgvhbj", "fghjk", "UNANSWERED", "ghjkn", 1, 1);
+insert into reported_question_model values(1, 1, 1);
+insert into question_model values(2, "xfcgvhbj", "fghjk", "UNANSWERED", "ghjkn", 1, 1);
+insert into question_model values(1, "xfcgvhbj", "fghjk", "UNANSWERED", "ghjkn" , 1, 1);

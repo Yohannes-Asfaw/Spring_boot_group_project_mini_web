@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registration</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div th:if="${answer2.size()} gt 0" th:each="answer: ${answer2}">
+        <div th:text="${answer.id}"></div>
+    </br>
+        <div th:text="${answer.reporter}"></div>
+    </br>
+        <div th:text="${answer.answer}"></div>
+    </br>
+        <!-- <td th:text="${answer.status}" />
+        <div th:if="${currentlyLoggedInUser.id} == ${answer.user.id}"> -->
+          <form th:action="@{${'/dismiss-report/' + answer.id}}" method="POST">
+            <button type="submit" class="btn btn-primary">Dismiss</button>
+          </form>
+        <!-- <div th:if="${currentlyLoggedInUser.id} == ${answer.user.id}"> -->
+          <form th:action="@{${'/resolve-report/' + answer.id}}" method="POST">
+            <button type="submit" class="btn btn-primary">Resolve</button>
+          </form>
+        <!-- </div> -->
+        <!-- <form th:action="@{${'/answer-answer/' + answer.id}}">
+          <button type="submit">Answer</button>
+        </form>
+        <form th:action="@{${'/report-answer/' + answer.id}}">
+          <button type="submit">Report</button>
+        </form> -->
+
+      </br>
+    </br>
+  </div>
+  <form method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+    </form>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>

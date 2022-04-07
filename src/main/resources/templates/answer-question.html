@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Profile</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </head>
+
+  <body class="bg-light">
+    <div class="container-xl px-4 mt-4">
+
+      <div th:replace="fragments/navbar"></div>
+      
+      <h2 class="mb-4">Answer Question</h2>
+      <form th:action="@{${'/answer-question/' + q.id}}" method="post" th:object="${answer}">
+          <section class="border rounded-sm bg-white">
+              <div class="border shadow-sm m-3 p-3">
+                  <h3>Question</h3>
+                  <p th:text="${q.content}"></p>
+              </div>
+              <div class="p-3">
+                  <h3>Your Answer</h3>
+                  <textarea th:field="*{content}" class="form-control shadow-sm" rows="8"></textarea>
+                  <div class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}" ></div>
+                  <button type="submit" class="btn btn-outline-primary align-content-center mt-3">Upload</button>
+              </div>
+          </section>
+      <form>
+
+</html>
